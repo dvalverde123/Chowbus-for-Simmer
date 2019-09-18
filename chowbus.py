@@ -48,17 +48,17 @@ def run_chowbusimagescraper(chowbus_id, foodie_id):
 	n = 0
 
 
-	elements = driver.find_elements_by_xpath("/html/body/div[4]/div[2]/div/div[1]/div/div[2]/div[1]/h1")
+	elements = driver.find_elements_by_class_name('jss290')
 	print(elements)
 	print("Elements length", len(elements))
 	for element in elements:
-		item_name = element.find_elements_by_xpath("/html/body/div[4]/div[2]/div/div[1]/div/div[2]/div[1]/h1").get_attribute(getText())
+		item_name = element.find_elements_by_class_name('jss290').get_attribute(getText())
 
 		matched_items = items_in_sentence(item_name, menu_items, 2, foodie_id, exceptions)
 		if(len(matched_items) == 0):
 			continue
 
-		imgs = element.find_elements_by_class_name("/html/body/div[4]/div[2]/div/div[1]/div/div[1]")
+		imgs = element.find_elements_by_class_name("jss326")
 		for img in imgs:
 			img_src = img.get_attribute("src")
 			print(img_src)
