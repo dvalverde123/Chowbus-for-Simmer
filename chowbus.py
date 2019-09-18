@@ -48,22 +48,21 @@ def run_chowbusimagescraper(chowbus_id, foodie_id):
 	n = 0
 
 
-	elements = driver.find_elements_by_xpath("//*[@id='7489']")
+	elements = driver.find_elements_by_xpath("/html/body/div[4]/div[2]/div/div[1]/div/div[2]/div[1]/h1")
 	print(elements)
 	print("Elements length", len(elements))
 	for element in elements:
-		print("more food")
-		item_name = element.find_elements_by_class_name("//*[@id='7489']").get_attribute(getText())
+		item_name = element.find_elements_by_xpath("/html/body/div[4]/div[2]/div/div[1]/div/div[2]/div[1]/h1").get_attribute(getText())
 
 		matched_items = items_in_sentence(item_name, menu_items, 2, foodie_id, exceptions)
 		if(len(matched_items) == 0):
 			continue
 
-		imgs = element.find_elements_by_class_name("//*img[@class=jss327jss329]")
+		imgs = element.find_elements_by_class_name("/html/body/div[4]/div[2]/div/div[1]/div/div[1]")
 		for img in imgs:
 			img_src = img.get_attribute("src")
 			print(img_src)
-			print("more food food")
+			
 			
 		
 			optimized_items = optimize_list(matched_items, item_name.lower())
@@ -92,7 +91,7 @@ def run_chowbusimagescraper(chowbus_id, foodie_id):
 		df.to_excel(path + foodie_id + ".xlsx", sheet_name='Sheet1', encoding="utf8", index=False)
 	return 'Added Chowbus Imgs'
 	print(path)
-	print("eat")
+	
 
 def pull_content(chowbus_id):
 	wiki = "https://www.chowbus.com/" + chowbus_id
